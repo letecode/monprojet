@@ -7,6 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Page Welcome</h1>
+    <h1>Page Projet : {{ $projet }}</h1>
 </body>
 </html>
