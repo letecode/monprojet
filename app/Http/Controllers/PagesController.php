@@ -2,14 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Agent;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PagesController extends Controller
 {
 
     public function index() {
-        $students = "Aliance et Paul";
-        return view('monsite', ['students' => $students]);
+        // Eloquent
+        $agents = Agent::whereHas('department', function($q){
+            $q->where('name', 'informatique');
+        })->get();
+
+        return view('monsite', ['agents' => $agents]);
     }
 
     public function contact() {
