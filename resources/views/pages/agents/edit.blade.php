@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('contenu')
     <div class="container">
@@ -17,7 +17,7 @@
         <form action="{{ route('agents.update', ['agent' => $agent]) }}" method="POST">
             @csrf
             @method('PUT')
-            
+
             <div class="mb-3">
                 <label for="name" class="form-label">Nom</label>
                 <input type="text" class="form-control" id="name" name="name" value="{{ $agent->name }}" placeholder="Entrez votre nom">

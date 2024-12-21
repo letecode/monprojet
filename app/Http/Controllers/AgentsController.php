@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Agent;
 use App\Models\Department;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -33,7 +34,8 @@ class AgentsController extends Controller
             'email' => ['required', 'unique:agents,email'],
             'phone' => ['required', 'max:15'],
             'birth_date' => ['required', 'date'],
-            'department_id' => ['required', 'numeric']
+            'department_id' => ['required', 'numeric'],
+            'role' => ['required']
         ])->validate();
 
         // enregistrer
@@ -45,7 +47,8 @@ class AgentsController extends Controller
         // $agent->department_id = $request->department_id;
         // $agent->save();
 
-        Agent::create($request->except('_token'));
+        $agent = Agent::create($request->except('_token'));
+        $agent->syncRoles([$request->role]);
 
         return redirect()->route('agents.liste')->with('success', 'Agent ajouté avec success');
     }

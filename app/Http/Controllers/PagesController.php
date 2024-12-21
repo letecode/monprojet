@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Agent;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,7 +16,10 @@ class PagesController extends Controller
             $q->where('name', 'informatique');
         })->get();
 
-        return view('monsite', ['agents' => $agents]);
+        return view('monsite', [
+            'agents' => $agents,
+            ]
+        );
     }
 
     public function contact() {
